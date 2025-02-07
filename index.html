@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Effect</title>
+    <style>
+      #output {
+        font-family: "Courier New", monospace;
+        font-size: 24px;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="output"></div>
+
+    <script>
+      // Sleep function to introduce delays (in milliseconds)
+      function sleep(millis) {
+        return new Promise((resolve) => setTimeout(resolve, millis));
+      }
+
+      // Typing effect function
+      async function simulateTypingEffect(text, elementId) {
+        const element = document.getElementById(elementId);
+        for (let char of text) {
+          element.innerHTML += char;
+          await sleep(200); // Delay between each character
+        }
+      }
+
+      // Start the typing effect
+      simulateTypingEffect("Hello, World!", "output");
+    </script>
+
+    <script src="intervalCancellation.js"></script>
+  </body>
+</html>
