@@ -8,6 +8,7 @@ let timeLimit = function (fn, t) {
 
     try {
       const result = await Promise.race([timeOutPromise, resultPromise]);
+
       return result;
     } catch (error) {
       throw error;
@@ -17,7 +18,7 @@ let timeLimit = function (fn, t) {
 
 async function run() {
   const fn = async (n) => {
-    await new Promise((res) => setTimeout(res, 100));
+    await new Promise((res) => setTimeout(res, 160));
     return n * n;
   };
 
@@ -30,13 +31,14 @@ async function run() {
     throw "Error";
   };
 
-  const timeLimitFn = timeLimit(fn1, 150);
+  const timeLimitFn = timeLimit(fn, 150);
   //   const inputs = [5];
   const inputs = [5, 10];
 
   const start = performance.now();
 
   let result;
+
   try {
     const res = await timeLimitFn(...inputs); // `await` can be used here because it's inside an async function
     result = { resolved: res, time: Math.floor(performance.now() - start) };
